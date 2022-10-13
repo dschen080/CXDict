@@ -6,3 +6,33 @@ spring:
     url: jdbc:mysql://rm-bp121b83zt132aok62o.mysql.rds.aliyuncs.com/cxdict?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: cct
     password: cct123!@# 
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v3/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload
+      - /wx/**
+      - /root/**
+      - /unitlisting/login
+      - /**
