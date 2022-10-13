@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cct.cds.cxdict.mbg.mapper.WordsMapper">
+  <resultMap id="BaseResultMap" type="cct.cds.cxdict.mbg.model.Words">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="word" jdbcType="VARCHAR" property="word" />
+    <result column="paraphrase" jdbcType="VARCHAR" property="paraphrase" />
+    <result column="fiveStar" jdbcType="BIT" property="fivestar" />
+    <result column="bRead" jdbcType="BIT" property="bread" />
+    <result column="sentences" jdbcType="VARCHAR" property="sentences" />
+    <result column="modifiedTime" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="synonyms" jdbcType="VARCHAR" property="synonyms" />
+    <result column="opposites" jdbcType="VARCHAR" property="opposites" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="practiced" jdbcType="INTEGER" property="practiced" />
+    <result column="errorrate" jdbcType="INTEGER" property="errorrate" />
+    <result column="wordFrequency" jdbcType="INTEGER" property="wordfrequency" />
+    <result column="righttimes" jdbcType="INTEGER" property="righttimes" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, word, paraphrase, fiveStar, bRead, sentences, modifiedTime, synonyms, opposites, 
+    frequency, practiced, errorrate, wordFrequency, righttimes, createTime
+  </sql>
+  <select id="selectByExample" parameterType="cct.cds.cxdict.mbg.model.WordsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from words
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from words
+    where id = #{id,jdbcType=INTEGER}
+      and word = #{word,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from words
+    where id = #{id,jdbcType=INTEGER}
+      and word = #{word,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cct.cds.cxdict.mbg.model.WordsExample">
+    delete from words
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cct.cds.cxdict.mbg.model.Words">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into words (word, paraphrase, fiveStar, 
+      bRead, sentences, modifiedTime, 
+      synonyms, opposites, frequency, 
+      practiced, errorrate, wordFrequency, 
+      righttimes, createTime)
+    values (#{word,jdbcType=VARCHAR}, #{paraphrase,jdbcType=VARCHAR}, #{fivestar,jdbcType=BIT}, 
+      #{bread,jdbcType=BIT}, #{sentences,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, 
+      #{synonyms,jdbcType=VARCHAR}, #{opposites,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}, 
+      #{practiced,jdbcType=INTEGER}, #{errorrate,jdbcType=INTEGER}, #{wordfrequency,jdbcType=INTEGER}, 
+      #{righttimes,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cct.cds.cxdict.mbg.model.Words">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into words
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="word != null">
+        word,
+      </if>
+      <if test="paraphrase != null">
+        paraphrase,
+      </if>
+      <if test="fivestar != null">
+        fiveStar,
+      </if>
+      <if test="bread != null">
+        bRead,
+      </if>
+      <if test="sentences != null">
+        sentences,
+      </if>
+      <if test="modifiedtime != null">
+        modifiedTime,
+      </if>
+      <if test="synonyms != null">
+        synonyms,
+      </if>
+      <if test="opposites != null">
+        opposites,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="practiced != null">
+        practiced,
+      </if>
+      <if test="errorrate != null">
+        errorrate,
+      </if>
+      <if test="wordfrequency != null">
+        wordFrequency,
+      </if>
+      <if test="righttimes != null">
+        righttimes,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="word != null">
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="paraphrase != null">
+        #{paraphrase,jdbcType=VARCHAR},
+      </if>
+      <if test="fivestar != null">
+        #{fivestar,jdbcType=BIT},
+      </if>
+      <if test="bread != null">
+        #{bread,jdbcType=BIT},
+      </if>
+      <if test="sentences != null">
+        #{sentences,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="synonyms != null">
+        #{synonyms,jdbcType=VARCHAR},
+      </if>
+      <if test="opposites != null">
+        #{opposites,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="practiced != null">
+        #{practiced,jdbcType=INTEGER},
+      </if>
+      <if test="errorrate != null">
+        #{errorrate,jdbcType=INTEGER},
+      </if>
+      <if test="wordfrequency != null">
+        #{wordfrequency,jdbcType=INTEGER},
+      </if>
+      <if test="righttimes != null">
+        #{righttimes,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cct.cds.cxdict.mbg.model.WordsExample" resultType="java.lang.Integer">
+    select count(*) from words
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update words
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.word != null">
+        word = #{record.word,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paraphrase != null">
+        paraphrase = #{record.paraphrase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fivestar != null">
+        fiveStar = #{record.fivestar,jdbcType=BIT},
+      </if>
+      <if test="record.bread != null">
+        bRead = #{record.bread,jdbcType=BIT},
+      </if>
+      <if test="record.sentences != null">
+        sentences = #{record.sentences,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifiedtime != null">
+        modifiedTime = #{record.modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synonyms != null">
+        synonyms = #{record.synonyms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opposites != null">
+        opposites = #{record.opposites,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.practiced != null">
+        practiced = #{record.practiced,jdbcType=INTEGER},
+      </if>
+      <if test="record.errorrate != null">
+        errorrate = #{record.errorrate,jdbcType=INTEGER},
+      </if>
+      <if test="record.wordfrequency != null">
+        wordFrequency = #{record.wordfrequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.righttimes != null">
+        righttimes = #{record.righttimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update words
+    set id = #{record.id,jdbcType=INTEGER},
+      word = #{record.word,jdbcType=VARCHAR},
+      paraphrase = #{record.paraphrase,jdbcType=VARCHAR},
+      fiveStar = #{record.fivestar,jdbcType=BIT},
+      bRead = #{record.bread,jdbcType=BIT},
+      sentences = #{record.sentences,jdbcType=VARCHAR},
+      modifiedTime = #{record.modifiedtime,jdbcType=VARCHAR},
+      synonyms = #{record.synonyms,jdbcType=VARCHAR},
+      opposites = #{record.opposites,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      practiced = #{record.practiced,jdbcType=INTEGER},
+      errorrate = #{record.errorrate,jdbcType=INTEGER},
+      wordFrequency = #{record.wordfrequency,jdbcType=INTEGER},
+      righttimes = #{record.righttimes,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cct.cds.cxdict.mbg.model.Words">
+    update words
+    <set>
+      <if test="paraphrase != null">
+        paraphrase = #{paraphrase,jdbcType=VARCHAR},
+      </if>
+      <if test="fivestar != null">
+        fiveStar = #{fivestar,jdbcType=BIT},
+      </if>
+      <if test="bread != null">
+        bRead = #{bread,jdbcType=BIT},
+      </if>
+      <if test="sentences != null">
+        sentences = #{sentences,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        modifiedTime = #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="synonyms != null">
+        synonyms = #{synonyms,jdbcType=VARCHAR},
+      </if>
+      <if test="opposites != null">
+        opposites = #{opposites,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="practiced != null">
+        practiced = #{practiced,jdbcType=INTEGER},
+      </if>
+      <if test="errorrate != null">
+        errorrate = #{errorrate,jdbcType=INTEGER},
+      </if>
+      <if test="wordfrequency != null">
+        wordFrequency = #{wordfrequency,jdbcType=INTEGER},
+      </if>
+      <if test="righttimes != null">
+        righttimes = #{righttimes,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and word = #{word,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cct.cds.cxdict.mbg.model.Words">
+    update words
+    set paraphrase = #{paraphrase,jdbcType=VARCHAR},
+      fiveStar = #{fivestar,jdbcType=BIT},
+      bRead = #{bread,jdbcType=BIT},
+      sentences = #{sentences,jdbcType=VARCHAR},
+      modifiedTime = #{modifiedtime,jdbcType=VARCHAR},
+      synonyms = #{synonyms,jdbcType=VARCHAR},
+      opposites = #{opposites,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      practiced = #{practiced,jdbcType=INTEGER},
+      errorrate = #{errorrate,jdbcType=INTEGER},
+      wordFrequency = #{wordfrequency,jdbcType=INTEGER},
+      righttimes = #{righttimes,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and word = #{word,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -6,6 +6,9 @@ spring:
     url: jdbc:mysql://rm-bp121b83zt132aok62o.mysql.rds.aliyuncs.com/cxdict?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: cct
     password: cct123!@# 
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
