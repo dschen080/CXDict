@@ -24,7 +24,7 @@ public class Swagger3Config {
                 // 是否开启
                 .enable(false).select()
                 // 扫描的路径包
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cct.cds.cxdict.controller"))
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 // 指定路径处理PathSelectors.any()代表所有的路径
