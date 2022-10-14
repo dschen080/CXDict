@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.cds.cxdict.common.api.CommonResult;
-import cct.cds.cxdict.service.RoleService;;
+import cct.cds.cxdict.dto.LoginParam;
+import cct.cds.cxdict.service.RoleService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +34,7 @@ public class RoleController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@Validated @RequestBody LoginParam loginParam){
-        String token = RoleService.login(loginParam.getUsername(), loginParam.getPassword());
+        String token = roleService.login(loginParam.getName(), loginParam.getPassword());
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }

@@ -16,7 +16,7 @@ public class CommonSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new NoOpPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
