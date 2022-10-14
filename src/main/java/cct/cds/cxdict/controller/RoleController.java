@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "RoleController", description = "用户管理")
 @Controller
-@RequestMapping("/Role")
+@RequestMapping("/role")
 public class RoleController {
 
     @Value("${jwt.tokenHead}")

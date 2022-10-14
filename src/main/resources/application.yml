@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://rm-bp121b83zt132aok62o.mysql.rds.aliyuncs.com/cxdict?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: cct
     password: cct123!@# 
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher

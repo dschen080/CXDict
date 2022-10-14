@@ -22,7 +22,7 @@ public class Swagger3Config {
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30).apiInfo(apiInfo())
                 // 是否开启
-                .enable(false).select()
+                .enable(true).select()
                 // 扫描的路径包
                 .apis(RequestHandlerSelectors.basePackage("cct.cds.cxdict.controller"))
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
@@ -36,7 +36,7 @@ public class Swagger3Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("CXDict")
-                .description("单词学习系统后端")
+                .description("cxdict")
                 .contact(new Contact("cds","","1104064233@qq.com"))
                 .version("1.0")
                 .build();
