@@ -11,5 +11,7 @@ public interface RoleService {
     UserDetails loadUserByUsername(String username);
 
     User getUserByUsername(String username);
+
+    int register(User user);
     
 }

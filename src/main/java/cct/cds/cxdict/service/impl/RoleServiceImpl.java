@@ -72,5 +72,11 @@ public class RoleServiceImpl implements RoleService{
         }
         return null;
     }
+
+    @Override
+    public int register(User user){
+        userMapper.insert(user);
+        return 1;
+    }
     
 }

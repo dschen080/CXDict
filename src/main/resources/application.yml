@@ -37,12 +37,4 @@ secure:
       - /favicon.ico
       - /actuator/**
       - /druid/**
-      - /admin/login
-      - /admin/register
-      - /admin/info
-      - /admin/logout
-      - /minio/upload
-      - /wx/**
-      - /root/**
-      - /unitlisting/login
-      - /**
+      - /role/**

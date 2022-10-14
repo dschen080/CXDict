@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.cds.cxdict.common.api.CommonResult;
 import cct.cds.cxdict.dto.LoginParam;
+import cct.cds.cxdict.mbg.model.User;
 import cct.cds.cxdict.service.RoleService;
 
 import io.swagger.annotations.Api;
@@ -42,6 +43,18 @@ public class RoleController {
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
+    }
+
+    @ApiOperation(value = "注册")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult register(@RequestBody User user){
+        int count = roleService.register(user);
+        if(count>0){
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+
     }
     
 }
