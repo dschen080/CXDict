@@ -10,7 +10,7 @@ public interface WordsMapper {
 
     int deleteByExample(WordsExample example);
 
-    int deleteByPrimaryKey(@Param("id") Integer id, @Param("word") String word);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Words record);
 
@@ -18,7 +18,7 @@ public interface WordsMapper {
 
     List<Words> selectByExample(WordsExample example);
 
-    Words selectByPrimaryKey(@Param("id") Integer id, @Param("word") String word);
+    Words selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Words record, @Param("example") WordsExample example);
 

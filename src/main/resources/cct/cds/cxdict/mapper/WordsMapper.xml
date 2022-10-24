@@ -3,7 +3,7 @@
 <mapper namespace="cct.cds.cxdict.mbg.mapper.WordsMapper">
   <resultMap id="BaseResultMap" type="cct.cds.cxdict.mbg.model.Words">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <id column="word" jdbcType="VARCHAR" property="word" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
     <result column="paraphrase" jdbcType="VARCHAR" property="paraphrase" />
     <result column="fiveStar" jdbcType="BIT" property="fivestar" />
     <result column="bRead" jdbcType="BIT" property="bread" />
@@ -94,17 +94,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from words
     where id = #{id,jdbcType=INTEGER}
-      and word = #{word,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="map">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from words
     where id = #{id,jdbcType=INTEGER}
-      and word = #{word,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="cct.cds.cxdict.mbg.model.WordsExample">
     delete from words
@@ -304,6 +302,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cct.cds.cxdict.mbg.model.Words">
     update words
     <set>
+      <if test="word != null">
+        word = #{word,jdbcType=VARCHAR},
+      </if>
       <if test="paraphrase != null">
         paraphrase = #{paraphrase,jdbcType=VARCHAR},
       </if>
@@ -345,11 +346,11 @@
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-      and word = #{word,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cct.cds.cxdict.mbg.model.Words">
     update words
-    set paraphrase = #{paraphrase,jdbcType=VARCHAR},
+    set word = #{word,jdbcType=VARCHAR},
+      paraphrase = #{paraphrase,jdbcType=VARCHAR},
       fiveStar = #{fivestar,jdbcType=BIT},
       bRead = #{bread,jdbcType=BIT},
       sentences = #{sentences,jdbcType=VARCHAR},
@@ -363,6 +364,5 @@
       righttimes = #{righttimes,jdbcType=INTEGER},
       createTime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
-      and word = #{word,jdbcType=VARCHAR}
   </update>
 </mapper>
